@@ -1,0 +1,14 @@
+{
+  "name": "Remove PR noise",
+  "version": "0.1.0",
+  "author": "Andrea Caldera",
+  "description": "Remove PR noise",
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "css": ["styles.css"],
+      "js": ["content.js"],
+      "matches": ["https://github.com/*"]
+    }
+  ]
+}
