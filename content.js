@@ -4,17 +4,7 @@ function querySelectorIncludesText(selector, text) {
   );
 }
 
-async function loadMore() {
-  if (querySelectorIncludesText("button", "Load more")) {
-    querySelectorIncludesText("button", "Load more").click();
-    await new Promise(function (resolve) {
-      setTimeout(resolve, 2000);
-    });
-    await loadMore();
-  }
-}
-
-loadMore().then(function () {
+function removePrNoise() {
   document.querySelectorAll(".js-timeline-item").forEach((el) => {
     if (el.innerText.includes("temporarily deployed to")) {
       el.style.display = "none";
@@ -25,4 +15,18 @@ loadMore().then(function () {
       el.style.display = "none";
     }
   });
-});
+}
+
+async function loadMore() {
+  removePrNoise();
+  if (querySelectorIncludesText("button", "Load more")) {
+    querySelectorIncludesText("button", "Load more").click();
+    await new Promise(function (resolve) {
+      setTimeout(resolve, 2000);
+    });
+    await loadMore();
+    removePrNoise();
+  }
+}
+
+loadMore();
